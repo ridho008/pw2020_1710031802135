@@ -21,3 +21,18 @@ function query($query) {
 	}
 	return $rows; //bawa/kembalikan baju bersama kotaknya
 }
+
+
+function tambah($data)
+{
+	$conn = koneksi();
+	$nama = htmlspecialchars($data['nama']);
+	$nrp = htmlspecialchars($data['nrp']);
+	$email = htmlspecialchars($data['email']);
+	$jurusan = htmlspecialchars($data['jurusan']);
+	$gambar = htmlspecialchars($data['gambar']);
+
+	$query = mysqli_query($conn, "INSERT INTO mahasiswa (nama, nrp, email, jurusan, gambar) VALUES ('$nama', '$nrp', '$email', '$jurusan', '$gambar')") or die(mysqli_error($conn));
+
+	return mysqli_affected_rows($conn);
+}
