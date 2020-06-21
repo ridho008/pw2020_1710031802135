@@ -18,7 +18,7 @@ if(isset($_POST['tambah'])) {
 </head>
 <body>
 	<h3>Formulir Tambah Data Mahasiswa</h3>
-	<form action="" method="post">
+	<form action="" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td>
@@ -53,7 +53,7 @@ if(isset($_POST['tambah'])) {
 			<tr>
 				<td>
 					<label for="gambar">Gambar</label>
-					<input type="text" name="gambar" id="gambar">
+					<input type="file" name="gambar" id="gambar">
 				</td>
 			</tr>
 			<tr>

@@ -30,7 +30,18 @@ function tambah($data)
 	$nrp = htmlspecialchars($data['nrp']);
 	$email = htmlspecialchars($data['email']);
 	$jurusan = htmlspecialchars($data['jurusan']);
-	$gambar = htmlspecialchars($data['gambar']);
+
+	// cek gambar
+	// sudo chmod -R 777 /var/www/html/test/uploads, jika terjadi error
+	$ektensiGambarValid = ['jpg', 'jpeg', 'png'];
+	$ektensi = explode('.', $_FILES['gambar']['name']);
+	$gambar = 'mhs' . round(microtime(true)) . '.' . end($ektensi);
+	$sumber = $_FILES['gambar']['tmp_name'];
+	if(!in_array($gambar, $ektensiGambarValid)) {
+		echo "<script>alert('Yang Anda Upload Bukan Gambar!');window.location='tambah.php';</script>";
+		return false;
+	}
+	move_uploaded_file($sumber, 'img/' . $gambar);
 
 	$query = mysqli_query($conn, "INSERT INTO mahasiswa (nama, nrp, email, jurusan, gambar) VALUES ('$nama', '$nrp', '$email', '$jurusan', '$gambar')") or die(mysqli_error($conn));
 
