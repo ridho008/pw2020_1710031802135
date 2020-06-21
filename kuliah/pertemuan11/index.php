@@ -2,7 +2,10 @@
 require_once 'functions.php';
 $mahasiswa = query("SELECT * FROM mahasiswa");
 
-// tampung ke variabel mahasiswa
+// ketika tombol cari diklik
+if(isset($_POST['cari'])) {
+	$mahasiswa = cari($_POST['keyword']);
+}
 
 ?>
 <!DOCTYPE html>
@@ -14,6 +17,11 @@ $mahasiswa = query("SELECT * FROM mahasiswa");
 <body>
 	<a href="tambah.php">Tambah Data Mahasiswa</a>
 	<h3>Daftar Mahasiswa</h3>
+	<form action="" method="post">
+		<input type="text" name="keyword" size="30" placeholder="masukan keyword pencarian" autocomplete="off" autofocus="on">
+		<button type="submit" name="cari">Cari</button>
+	</form>
+	<br>
 	<table border="1" cellpadding="10" cellspacing="0">
 		<tr>
 			<th>#</th>
@@ -21,6 +29,11 @@ $mahasiswa = query("SELECT * FROM mahasiswa");
 			<th>Nama</th>
 			<th>Aksi</th>
 		</tr>
+		<?php if(empty($mahasiswa)) : ?>
+		<tr>
+			<td colspan="4">Data mahasiswa tidak ditemukan!</td>
+		</tr>
+		<?php endif; ?>
 		<?php 
 		$no = 1;
 		foreach($mahasiswa as $mhs) : ?>

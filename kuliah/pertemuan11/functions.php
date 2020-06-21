@@ -124,3 +124,15 @@ function upload()
 	move_uploaded_file($tmpName, 'img/' . $namaFileBaru);
 	return $namaFileBaru;
 }
+
+
+function cari($keyword)
+{
+	// $conn = koneksi();
+	$query = "SELECT * FROM mahasiswa WHERE 
+						nama LIKE '%$keyword%' OR 
+						nrp LIKE '%$keyword%' OR 
+						email LIKE '%$keyword%' OR 
+						jurusan LIKE '%$keyword%'";
+	return query($query);
+}
